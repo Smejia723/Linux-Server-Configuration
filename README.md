@@ -3,19 +3,19 @@ Udacity project of configuring a server with the use of amazonlightsail to host 
 
 you can visit the deployed webiste here :
 
+# Change SSH ports from 22 to 2200
+
+# Configure Firewall (UFW)
+
+# Update currently installed packages
+
+# Configure the local timezone to UTC
+
 # Instructions for SSH access to the instance
 
 # Creating a new user named grader
 
 # Set ssh login using keys
-
-# Update currently installed packages
-
-# Change SSH ports from 22 to 2200
-
-# Configure Firewall (UFW)
-
-# Configure the local timezone to UTC
 
 # Install and configure Apache to serve a Python mod_wsgi application
 
