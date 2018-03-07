@@ -50,13 +50,20 @@ Note: moved Port 22 to a second line during project to use lightsail and gitBash
 - deploy public key (note: passpharse is asked to add for extra security make it unique if used)
 - On virtual machine:
   `sudo nano grader`
+  
   `mkdir .ssh`
+  
   `touch .ssh/authorized_keys`
+  
   `sudo nano .ssh/authorized_keys`
+  
 - Copy the public key generated on the local Machine to file and save then:
   `chmod 700 .ssh`
+  
   `chomd 644 .ssh/authorized_keys`
+  
 - Exit grader and now you can log back into grader as:
+
   ` ssh grader@54.237.161.20 -p 2200 -i ~/.ssh/linuxCourse`
 
 # Install and configure Apache to serve a Python mod_wsgi application
