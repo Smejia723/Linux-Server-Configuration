@@ -49,6 +49,7 @@ Note: moved Port 22 to a second line during project to use lightsail and gitBash
 - On local Machine (user's computer) use `ssh-keygen` then save private key in `/c/Users/<User>/.ssh/linuxCourse` on local machine
 - deploy public key (note: passpharse is asked to add for extra security make it unique if used)
 - On virtual machine:
+
   `sudo nano grader`
   
   `mkdir .ssh`
@@ -58,6 +59,7 @@ Note: moved Port 22 to a second line during project to use lightsail and gitBash
   `sudo nano .ssh/authorized_keys`
   
 - Copy the public key generated on the local Machine to file and save then:
+
   `chmod 700 .ssh`
   
   `chomd 644 .ssh/authorized_keys`
@@ -67,8 +69,24 @@ Note: moved Port 22 to a second line during project to use lightsail and gitBash
   ` ssh grader@54.237.161.20 -p 2200 -i ~/.ssh/linuxCourse`
 
 # Install and configure Apache to serve a Python mod_wsgi application
+-Install Apache ` sudo apt-get install apache2`
+-Install mod_wsgi ` sudo apt-get install libapache2-mod-wsgi`
+-restart apache `sudo service apache2 restart`
 
 # Install and configure PostgreSQL
+-Install PostgreSQL `sudo apt-get install postgresql`
+-login as user "postgres" `sudo su - postgres`
+-Get into postgreSQL shell `psql`
+-Creare a database named catalog and a new user named catalog in the shell
+`CREATE DATABASE catalog;`
+AND
+`CREATE USER catalog;`
+-Set a password for catalog
+`ALTER ROLE catalog WITH PASSWORD 'password';`
+-Only let user catalog create tables 
+`# GRANT ALL ON SCHEMA public TO catalog;`
+-Quit postgreSQL `\q`
+-logout from user "postgres" 
 
 # Install git, clone and setup the Item Catalog project
 
