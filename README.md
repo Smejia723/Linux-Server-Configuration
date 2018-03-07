@@ -15,16 +15,15 @@ Note: moved Port 22 to a second line during project to use lightsail and gitBash
 
 # Configure Firewall (UFW)
 - Configured the UFW or Uncomplicated Firewall to allow incoming connections for ssh port 2200 from gitBash, HTTP port 80 for the web and NTP port 123:
-`
-sudo ufw allow ssh
-sudo ufw allow www
-sudo ufw allow ntp
-sudo ufw allow 2200/tcp
-sudo ufw allow 80/tcp
-sudo ufw allow 123/udp
-sudo ufw enable 
-sudo ufw status
-`
+
+`sudo ufw allow ssh`
+`sudo ufw allow www`
+`sudo ufw allow ntp`
+`sudo ufw allow 2200/tcp`
+`sudo ufw allow 80/tcp`
+`sudo ufw allow 123/udp`
+`sudo ufw enable` 
+`sudo ufw status`
 
 # Update currently installed packages
 - Used `sudo apt-get update` then `sudo apt-get upgrade`
