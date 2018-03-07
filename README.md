@@ -39,6 +39,11 @@ Note: moved Port 22 to a second line during project to use lightsail and gitBash
 - configue time zone `sudo dpkg-reconfigure tzdata` to eastern time.
 
 # Creating a new user named grader
+- `sudo adduser grader`
+- set password conform password (add info if needed)
+- `sudo ls /etc/sudors.d`
+- `sudo cp /etc/sudoers.d/90-cloud-init-users /etc/sudoers.d/grader`
+- `sudo nano /etc/sudoers.d/grader`, change 90-cloud-init-users to grader, save and quit.
 
 # Set ssh login using keys
 
