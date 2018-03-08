@@ -60,61 +60,54 @@ sudo ufw status
   ` ssh grader@54.237.161.20 -p 2200 -i ~/.ssh/linuxCourse`
 
 # Install and configure Apache to serve a Python mod_wsgi application
--Install Apache ` sudo apt-get install apache2`
--Install mod_wsgi ` sudo apt-get install libapache2-mod-wsgi`
--restart apache `sudo service apache2 restart`
+- Install Apache ` sudo apt-get install apache2`
+- Install mod_wsgi ` sudo apt-get install libapache2-mod-wsgi`
+- restart apache `sudo service apache2 restart`
 
 # Install and configure PostgreSQL
--Install PostgreSQL `sudo apt-get install postgresql`
--login as user "postgres" `sudo su - postgres`
--Get into postgreSQL shell `psql`
--Creare a database named catalog and a new user named catalog in the shell
+- Install PostgreSQL `sudo apt-get install postgresql`
+- login as user "postgres" `sudo su - postgres`
+- Get into postgreSQL shell `psql`
+- Creare a database named catalog and a new user named catalog in the shell
 `CREATE DATABASE catalog;`
 AND
 `CREATE USER catalog;`
--Set a password for catalog
+- Set a password for catalog
 `ALTER ROLE catalog WITH PASSWORD 'password';`
--Only let user catalog create tables with
+- Only let user catalog create tables with
 `REVOKE ALL ON SCHEMA public FROM public`
 then
 `GRANT ALL ON SCHEMA public TO catalog;`
--Quit postgreSQL `\q`
--logout from user "postgres" 
+- Quit postgreSQL `\q`
+- Logout from user "postgres" 
 
 # Install git, clone and setup the Item Catalog project
--Install Git using `sudo apt-get install git`
+- Install Git using `sudo apt-get install git`
+- Use `cd/var/www` to move to the directory
+- Create the application directory `sudo mkdir FlaskApp`
+- Move to FlaskApp `cd FlaskApp`
+- Clone the Item-Catalog to the VM `sudo git clone https://github.com/Smejia723/Item-Catalog.git`
+- Rename the project's name `sudo mv ./Item-Catalog ./FlaskApp`
+- Move to the inner FlaskApp directory using `cd FlaskApp`
+- Rename `project.py` to `__init__.py` using `sudo mv project.py __init_.py`
 
--Use `cd/var/www` to move to the directory
-
--Create the application directory `sudo mkdir FlaskApp`
-
--move to FlaskApp `cd FlaskApp`
-
--Clone the Item-Catalog to the VM `sudo git clone https://github.com/Smejia723/Item-Catalog.git`
-
--Rename the project's name `sudo mv ./Item-Catalog ./FlaskApp`
-
--Move to the inner FlaskApp directory using `cd FlaskApp`
-
--rename `project.py` to `__init__.py` using `sudo mv project.py __init_.py`
-
--edit `database_setup.py` and `lotsofmenus.py` to change 
+- Edit `database_setup.py` and `lotsofmenus.py` to change 
 `engine = create_enging('sqlite:///restaurantmenu.db')` to 
 `engine = create_enging('postgresql://catalog:password@localhost/catalog')`
--install pip `sudo apt-get install python-pip`
--Use pip to install dependencies:
+- Install pip `sudo apt-get install python-pip`
+- Use pip to install dependencies:
 ```
 sudo pip install sqlalchemy flask-sqlalchemy psycopg2 bleach requests
 sudo pip install flask packaging oauth2client redis passlib flask-httpauth
 ```
--Install spycopg2 `sudo apt-get -qqy install postgresql python-psycopg2`
--Create database `sudo python database_setup.py`
--Fill database `python /var/www/FlaskApp/FlaskApp/lotsofmenus.py`
+- Install spycopg2 `sudo apt-get -qqy install postgresql python-psycopg2`
+- Create database `sudo python database_setup.py`
+- Fill database `python /var/www/FlaskApp/FlaskApp/lotsofmenus.py`
 
 # Configure and Enable a New Virtual Host
--Create FlaskApp.conf to edit: `sudo nano /etc/apache2/sites-available/FlaskApp.conf`
+- Create FlaskApp.conf to edit: `sudo nano /etc/apache2/sites-available/FlaskApp.conf`
 
--Add the flowing to the file:
+- Add the flowing to the file:
 ```
 <VirtualHost *:80>
 	ServerName Item_Catalog.py
@@ -134,15 +127,15 @@ sudo pip install flask packaging oauth2client redis passlib flask-httpauth
 	CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
--enable the virtual host with `sudo a2ensite FlaskApp`
--restart apache `sudo service apache2 restart`
+- Enable the virtual host with `sudo a2ensite FlaskApp`
+- Restart apache `sudo service apache2 restart`
 
 # Create the Catalog.wsgi File
 - Create the .wsgi File under 
 `cd /var/www/FlaskApp`
 then
 `sudo nano flaskapp.wsgi`
--Add the flowing to the file:
+- Add the flowing to the file:
 ```
 #!/usr/bin/python
 import sys
@@ -153,7 +146,7 @@ sys.path.insert(0,"/var/www/FlaskApp/")
 from FlaskApp import app as application
 application.secret_key = 'super_secret_key'
 ```
--restart apache `sudo service apache2 restart`
+- Restart apache `sudo service apache2 restart`
 
 # References:
 
