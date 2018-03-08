@@ -112,7 +112,7 @@ AND
 -Create FlaskApp.conf to edit: `sudo nano /etc/apache2/sites-available/FlaskApp.conf`
 
 -Add the flowing to the file:
-`
+```
 <VirtualHost *:80>
 	ServerName Item_Catalog.py
 	ServerAdmin 54.159.228.41
@@ -130,7 +130,7 @@ AND
 	LogLevel warn
 	CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
-`
+```
 -enable the virtual host with `sudo a2ensite FlaskApp`
 -restart apache `sudo service apache2 restart`
 
