@@ -17,19 +17,12 @@ Note: moved Port 22 to a second line during project to use lightsail and gitBash
 - Configured the UFW or Uncomplicated Firewall to allow incoming connections for ssh port 2200 from gitBash, HTTP port 80 for the web and NTP port 123:
 ```
 sudo ufw allow ssh
-
 sudo ufw allow www
-
 sudo ufw allow ntp
-
 sudo ufw allow 2200/tcp
-
 sudo ufw allow 80/tcp
-
 sudo ufw allow 123/udp
-
 sudo ufw enable 
-
 sudo ufw status
 ```
 # Update currently installed packages
@@ -90,13 +83,21 @@ then
 
 # Install git, clone and setup the Item Catalog project
 -Install Git using `sudo apt-get install git`
+
 -Use `cd/var/www` to move to the directory
+
 -Create the application directory `sudo mkdir FlaskApp`
+
 -move to FlaskApp `cd FlaskApp`
+
 -Clone the Item-Catalog to the VM `sudo git clone https://github.com/Smejia723/Item-Catalog.git`
+
 -Rename the project's name `sudo mv ./Item-Catalog ./FlaskApp`
+
 -Move to the inner FlaskApp directory using `cd FlaskApp`
+
 -rename `project.py` to `__init__.py` using `sudo mv project.py __init_.py`
+
 -edit `database_setup.py` and `lotsofmenus.py` to change 
 `engine = create_enging('sqlite:///restaurantmenu.db')` to 
 `engine = create_enging('postgresql://catalog:password@localhost/catalog')`
