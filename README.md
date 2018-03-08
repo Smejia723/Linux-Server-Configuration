@@ -1,7 +1,7 @@
 # Udacity Linux-Server-Configuration
 Udacity project of configuring a server with the use of amazonlightsail to host a previous worked project the Item Catalog.
 
-you can visit the deployed webiste here :
+you can visit the deployed webiste here : http://54.159.228.41/
 
 # Change SSH ports from 22 to 2200
 - Use `sudo nano /etc/ssh/sshd_config` and changed Port 22 to 2200, save and quit.
@@ -15,23 +15,23 @@ Note: moved Port 22 to a second line during project to use lightsail and gitBash
 
 # Configure Firewall (UFW)
 - Configured the UFW or Uncomplicated Firewall to allow incoming connections for ssh port 2200 from gitBash, HTTP port 80 for the web and NTP port 123:
+```
+sudo ufw allow ssh
 
-`sudo ufw allow ssh`
+sudo ufw allow www
 
-`sudo ufw allow www`
+sudo ufw allow ntp
 
-`sudo ufw allow ntp`
+sudo ufw allow 2200/tcp
 
-`sudo ufw allow 2200/tcp`
+sudo ufw allow 80/tcp
 
-`sudo ufw allow 80/tcp`
+sudo ufw allow 123/udp
 
-`sudo ufw allow 123/udp`
+sudo ufw enable 
 
-`sudo ufw enable` 
-
-`sudo ufw status`
-
+sudo ufw status
+```
 # Update currently installed packages
 - Used `sudo apt-get update` then `sudo apt-get upgrade`
 
@@ -49,14 +49,12 @@ Note: moved Port 22 to a second line during project to use lightsail and gitBash
 - On local Machine (user's computer) use `ssh-keygen` then save private key in `/c/Users/<User>/.ssh/linuxCourse` on local machine
 - deploy public key (note: passpharse is asked to add for extra security make it unique if used)
 - On virtual machine:
-
-  `sudo nano grader`
-  
-  `mkdir .ssh`
-  
-  `touch .ssh/authorized_keys`
-  
-  `sudo nano .ssh/authorized_keys`
+```
+  sudo nano grader 
+  mkdir .ssh 
+  touch .ssh/authorized_keys  
+  sudo nano .ssh/authorized_keys
+  ```
   
 - Copy the public key generated on the local Machine to file and save then:
 
@@ -83,8 +81,10 @@ AND
 `CREATE USER catalog;`
 -Set a password for catalog
 `ALTER ROLE catalog WITH PASSWORD 'password';`
--Only let user catalog create tables 
-`# GRANT ALL ON SCHEMA public TO catalog;`
+-Only let user catalog create tables with
+`REVOKE ALL ON SCHEMA public FROM public`
+then
+`GRANT ALL ON SCHEMA public TO catalog;`
 -Quit postgreSQL `\q`
 -logout from user "postgres" 
 
@@ -102,13 +102,13 @@ AND
 `engine = create_enging('postgresql://catalog:password@localhost/catalog')`
 -install pip `sudo apt-get install python-pip`
 -Use pip to install dependencies:
-
-`sudo pip install sqlalchemy flask-sqlalchemy psycopg2 bleach requests`
-
-`sudo pip install flask packaging oauth2client redis passlib flask-httpauth`
+```
+sudo pip install sqlalchemy flask-sqlalchemy psycopg2 bleach requests
+sudo pip install flask packaging oauth2client redis passlib flask-httpauth
+```
 -Install spycopg2 `sudo apt-get -qqy install postgresql python-psycopg2`
 -Create database `sudo python database_setup.py`
--Fill database `sudo pip install lotsofmenus.py`
+-Fill database `python /var/www/FlaskApp/FlaskApp/lotsofmenus.py`
 
 # Configure and Enable a New Virtual Host
 -Create FlaskApp.conf to edit: `sudo nano /etc/apache2/sites-available/FlaskApp.conf`
