@@ -89,8 +89,50 @@ AND
 -logout from user "postgres" 
 
 # Install git, clone and setup the Item Catalog project
+-Install Git using `sudo apt-get install git`
+-Use `cd/var/www` to move to the directory
+-Create the application directory `sudo mkdir FlaskApp`
+-move to FlaskApp `cd FlaskApp`
+-Clone the Item-Catalog to the VM `sudo git clone https://github.com/Smejia723/Item-Catalog.git`
+-Rename the project's name `sudo mv ./Item-Catalog ./FlaskApp`
+-Move to the inner FlaskApp directory using `cd FlaskApp`
+-rename `project.py` to `__init__.py` using `sudo mv project.py __init_.py`
+-edit `database_setup.py` and `lotsofmenus.py` to change `engine = create_enging('sqlite:///restaurantmenu.db')` to `engine = create_enging('postgresql://catalog:password@localhost/catalog')`
+-install pip `sudo apt-get install python-pip`
+-Use pip to install dependencies:
+
+`sudo pip install sqlalchemy flask-sqlalchemy psycopg2 bleach requests`
+
+`sudo pip install flask packaging oauth2client redis passlib flask-httpauth`
+-Install spycopg2 `sudo apt-get -qqy install postgresql python-psycopg2`
+-Create database `sudo python database_setup.py`
+-Fill database `sudo pip install lotsofmenus.py`
 
 # Configure and Enable a New Virtual Host
+-Create FlaskApp.conf to edit: `sudo nano /etc/apache2/sites-available/FlaskApp.conf`
+
+-Add the flowing to the file:
+`
+<VirtualHost *:80>
+	ServerName Item_Catalog.py
+	ServerAdmin 54.159.228.41
+	WSGIScriptAlias / /var/www/FlaskApp/flaskapp.wsgi
+	<Directory /var/www/FlaskApp/FlaskApp/>
+		Order allow,deny
+		Allow from all
+	</Directory>
+	Alias /static /var/www/FlaskApp/FlaskApp/static
+	<Directory /var/www/FlaskApp/FlaskApp/static/>
+		Order allow,deny
+		Allow from all
+	</Directory>
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	LogLevel warn
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+`
+-enable the virtual host with `sudo a2ensite FlaskApp`
+-restart apache `sudo service apache2 restart`
 
 # Create the Catalog.wsgi File
 
