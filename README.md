@@ -97,7 +97,9 @@ AND
 -Rename the project's name `sudo mv ./Item-Catalog ./FlaskApp`
 -Move to the inner FlaskApp directory using `cd FlaskApp`
 -rename `project.py` to `__init__.py` using `sudo mv project.py __init_.py`
--edit `database_setup.py` and `lotsofmenus.py` to change `engine = create_enging('sqlite:///restaurantmenu.db')` to `engine = create_enging('postgresql://catalog:password@localhost/catalog')`
+-edit `database_setup.py` and `lotsofmenus.py` to change 
+`engine = create_enging('sqlite:///restaurantmenu.db')` to 
+`engine = create_enging('postgresql://catalog:password@localhost/catalog')`
 -install pip `sudo apt-get install python-pip`
 -Use pip to install dependencies:
 
@@ -135,8 +137,22 @@ AND
 -restart apache `sudo service apache2 restart`
 
 # Create the Catalog.wsgi File
+- Create the .wsgi File under 
+`cd /var/www/FlaskApp`
+then
+`sudo nano flaskapp.wsgi`
+-Add the flowing to the file:
+```
+#!/usr/bin/python
+import sys
+import logging
+logging.basicConfig(stream=sys.stderr)
+sys.path.insert(0,"/var/www/FlaskApp/")
 
-# Restart Apache
+from FlaskApp import app as application
+application.secret_key = 'super_secret_key'
+```
+-restart apache `sudo service apache2 restart`
 
 # References:
 
