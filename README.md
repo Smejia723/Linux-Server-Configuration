@@ -57,7 +57,7 @@ sudo ufw status
   
 - Exit grader and now you can log back into grader as:
 
-  ` ssh grader@54.237.161.20 -p 2200 -i ~/.ssh/linuxCourse`
+  ` ssh grader@54.159.228.41 -p 2200 -i ~/.ssh/linuxCourse`
 
 # Install and configure Apache to serve a Python mod_wsgi application
 - Install Apache ` sudo apt-get install apache2`
