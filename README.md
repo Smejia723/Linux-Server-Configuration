@@ -163,3 +163,9 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgres
 https://discussions.udacity.com/t/connection-error-linux/241400/36
 
 https://discussions.udacity.com/t/installing-virtualenv/224005/2
+
+https://discussions.udacity.com/t/connecting-to-a-database-in-myapp-wsgi/227584/21
+
+https://askubuntu.com/questions/572093/how-to-install-tree-with-command-line
+
+https://serverfault.com/questions/694010/how-to-whitelist-a-directory-in-apache
