@@ -6,7 +6,7 @@ you can visit the deployed webiste here : http://54.159.228.41/
 # Change SSH ports from 22 to 2200
 - Use `sudo nano /etc/ssh/sshd_config` and changed Port 22 to 2200, save and quit.
 - reload ssh using `sudo service ssh restart`
-Note: moved Port 22 to a second line during project to use lightsail and gitBash got rid near end.
+Note: moved Port 22 to a second line during project to use lightsail and gitBash, erased Port 22 near end.
 
 # Instructions for SSH access to the instance
 - Download Private key from the SSH keys in the Account section of Amazon Lightsail.
