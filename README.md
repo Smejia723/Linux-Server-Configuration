@@ -169,3 +169,5 @@ https://discussions.udacity.com/t/connecting-to-a-database-in-myapp-wsgi/227584/
 https://askubuntu.com/questions/572093/how-to-install-tree-with-command-line
 
 https://serverfault.com/questions/694010/how-to-whitelist-a-directory-in-apache
+
+https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
