@@ -1,20 +1,25 @@
 # Udacity Linux-Server-Configuration
+
 Udacity project of configuring a server with the use of amazonlightsail to host a previous worked project the Item Catalog.
 
 you can visit the deployed webiste here : http://54.159.228.41/
 
 # Change SSH ports from 22 to 2200
+
 - Use `sudo nano /etc/ssh/sshd_config` and changed Port 22 to 2200, save and quit.
 - reload ssh using `sudo service ssh restart`
 Note: moved Port 22 to a second line during project to use lightsail and gitBash, erased Port 22 near end.
 
 # Instructions for SSH access to the instance
+
 - Download Private key from the SSH keys in the Account section of Amazon Lightsail.
 - Move Private key into folder <User>/.ssh of local computer directory. 
 - in gitBash terminal type in `ssh -i ~/.ssh/LightsailDefaultPrivateKey-us-east-1.pem -p 2200 ubuntu@54.159.228.41`
 
 # Configure Firewall (UFW)
+
 - Configured the UFW or Uncomplicated Firewall to allow incoming connections for ssh port 2200 from gitBash, HTTP port 80 for the web and NTP port 123:
+
 ```
 sudo ufw allow ssh
 sudo ufw allow www
@@ -25,13 +30,17 @@ sudo ufw allow 123/udp
 sudo ufw enable 
 sudo ufw status
 ```
+
 # Update currently installed packages
+
 - Used `sudo apt-get update` then `sudo apt-get upgrade`
 
 # Configure the local timezone to UTC
+
 - configue time zone `sudo dpkg-reconfigure tzdata` to eastern time.
 
 # Creating a new user named grader
+
 - `sudo adduser grader`
 - set password conform password (add info if needed)
 - `sudo ls /etc/sudors.d`
@@ -39,6 +48,7 @@ sudo ufw status
 - `sudo nano /etc/sudoers.d/grader`, change 90-cloud-init-users to grader, save and quit.
 
 # Set ssh login using keys
+
 - On local Machine (user's computer) use `ssh-keygen` then save private key in `/c/Users/<User>/.ssh/linuxCourse` on local machine
 - deploy public key (note: passpharse is asked to add for extra security make it unique if used)
 - On virtual machine:
@@ -60,11 +70,13 @@ sudo ufw status
   ` ssh grader@54.159.228.41 -p 2200 -i ~/.ssh/linuxCourse`
 
 # Install and configure Apache to serve a Python mod_wsgi application
+
 - Install Apache ` sudo apt-get install apache2`
 - Install mod_wsgi ` sudo apt-get install libapache2-mod-wsgi`
 - restart apache `sudo service apache2 restart`
 
 # Install and configure PostgreSQL
+
 - Install PostgreSQL `sudo apt-get install postgresql`
 - login as user "postgres" `sudo su - postgres`
 - Get into postgreSQL shell `psql`
@@ -82,6 +94,7 @@ then
 - Logout from user "postgres" 
 
 # Install git, clone and setup the Item Catalog project
+
 - Install Git using `sudo apt-get install git`
 - Use `cd/var/www` to move to the directory
 - Create the application directory `sudo mkdir FlaskApp`
@@ -105,9 +118,11 @@ sudo pip install flask packaging oauth2client redis passlib flask-httpauth
 - Fill database `python /var/www/FlaskApp/FlaskApp/lotsofmenus.py`
 
 # Configure and Enable a New Virtual Host
+
 - Create FlaskApp.conf to edit: `sudo nano /etc/apache2/sites-available/FlaskApp.conf`
 
 - Add the flowing to the file:
+
 ```
 <VirtualHost *:80>
 	ServerName Item_Catalog.py
@@ -131,6 +146,7 @@ sudo pip install flask packaging oauth2client redis passlib flask-httpauth
 - Restart apache `sudo service apache2 restart`
 
 # Create the Catalog.wsgi File
+
 - Create the .wsgi File under 
 `cd /var/www/FlaskApp`
 then
